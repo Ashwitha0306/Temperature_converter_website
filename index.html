@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Temperature Converter</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="18" fill="url(#lg1)" />
+            <path d="M18 8v12M18 26a4 4 0 100-8 4 4 0 000 8z" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+            <path d="M22 12h3M22 15h2" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+            <defs>
+              <linearGradient id="lg1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00E5FF" />
+                <stop offset="1" stop-color="#7B2FF7" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">ThermoSync</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#converter">Convert</a>
+        <a href="#quick-cards">Quick</a>
+        <a href="#facts">Facts</a>
+        <a href="#history">History</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon sun">☀️</span>
+        <span class="theme-icon moon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+    <div class="floating-icons">
+      <span class="fi fi1">🌡️</span>
+      <span class="fi fi2">❄️</span>
+      <span class="fi fi3">🔥</span>
+      <span class="fi fi4">🌤️</span>
+      <span class="fi fi5">⛄</span>
+      <span class="fi fi6">☀️</span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">REAL-TIME CONVERTER</div>
+      <h1 class="hero-title">Convert Temperatures<br /><span class="gradient-text">Instantly</span></h1>
+      <p class="hero-sub">Convert between Celsius, Fahrenheit, and Kelvin with real-time results.</p>
+      <a href="#converter" class="hero-cta">
+        Start Converting
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+    <div class="hero-visual">
+      <div class="thermometer-3d">
+        <div class="thermo-tube">
+          <div class="thermo-fill" id="heroFill"></div>
+        </div>
+        <div class="thermo-bulb"></div>
+        <div class="thermo-marks">
+          <span>100°</span><span>75°</span><span>50°</span><span>25°</span><span>0°</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONVERTER ===== -->
+  <section class="section" id="converter">
+    <div class="section-label">CONVERSION ENGINE</div>
+    <h2 class="section-title">Temperature Converter</h2>
+    <div class="converter-card glass-card">
+      <div class="converter-body">
+        <div class="input-group">
+          <label for="tempInput">Temperature Value</label>
+          <div class="input-wrap">
+            <input type="number" id="tempInput" placeholder="Enter value..." step="any" autocomplete="off" />
+            <span class="input-unit" id="inputUnitLabel">°C</span>
+          </div>
+          <div class="error-msg" id="errorMsg"></div>
+        </div>
+
+        <div class="selects-row">
+          <div class="select-group">
+            <label for="fromUnit">From</label>
+            <div class="select-wrap">
+              <select id="fromUnit">
+                <option value="C">Celsius (°C)</option>
+                <option value="F">Fahrenheit (°F)</option>
+                <option value="K">Kelvin (K)</option>
+              </select>
+            </div>
+          </div>
+          <button class="swap-btn" id="swapBtn" title="Swap units">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4" />
+            </svg>
+          </button>
+          <div class="select-group">
+            <label for="toUnit">To</label>
+            <div class="select-wrap">
+              <select id="toUnit">
+                <option value="C">Celsius (°C)</option>
+                <option value="F">Fahrenheit (°F)</option>
+                <option value="K">Kelvin (K)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-convert" id="convertBtn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+            </svg>
+            Convert
+          </button>
+          <button class="btn-reset" id="resetBtn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+            </svg>
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- RESULT -->
+      <div class="result-panel" id="resultPanel">
+        <div class="result-idle" id="resultIdle">
+          <div class="result-idle-icon">🌡️</div>
+          <p>Enter a value and hit Convert</p>
+        </div>
+        <div class="result-display hidden" id="resultDisplay">
+          <div class="result-from" id="resultFrom"></div>
+          <div class="result-arrow">
+            <svg viewBox="0 0 40 14" width="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 7h36M30 1l6 6-6 6" stroke="url(#ra)" stroke-width="2" stroke-linecap="round" />
+              <defs>
+                <linearGradient id="ra" x1="0" y1="0" x2="40" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#00E5FF" />
+                  <stop offset="1" stop-color="#7B2FF7" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="result-to" id="resultTo"></div>
+          <div class="result-formula" id="resultFormula"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ALL THREE CONVERSIONS AT ONCE ===== -->
+  <section class="section" id="all-results">
+    <div class="section-label">ALL SCALES</div>
+    <h2 class="section-title">All Temperature Scales</h2>
+    <div class="all-scales-grid" id="allScalesGrid">
+      <div class="scale-card glass-card">
+        <div class="scale-icon">🌡️</div>
+        <div class="scale-name">Celsius</div>
+        <div class="scale-value" id="allC">—</div>
+        <div class="scale-sym">°C</div>
+      </div>
+      <div class="scale-card glass-card">
+        <div class="scale-icon">🌡️</div>
+        <div class="scale-name">Fahrenheit</div>
+        <div class="scale-value" id="allF">—</div>
+        <div class="scale-sym">°F</div>
+      </div>
+      <div class="scale-card glass-card">
+        <div class="scale-icon">⚛️</div>
+        <div class="scale-name">Kelvin</div>
+        <div class="scale-value" id="allK">—</div>
+        <div class="scale-sym">K</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUICK CONVERSION CARDS ===== -->
+  <section class="section" id="quick-cards">
+    <div class="section-label">REFERENCE POINTS</div>
+    <h2 class="section-title">Common Temperatures</h2>
+    <div class="quick-grid" id="quickGrid">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <!-- ===== TEMPERATURE FACTS ===== -->
+  <section class="section" id="facts">
+    <div class="section-label">DID YOU KNOW</div>
+    <h2 class="section-title">Temperature Facts</h2>
+    <div class="facts-grid" id="factsGrid">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <!-- ===== HISTORY ===== -->
+  <section class="section" id="history">
+    <div class="section-label">RECENT ACTIVITY</div>
+    <h2 class="section-title">Conversion History</h2>
+    <div class="history-wrap glass-card">
+      <div class="history-header">
+        <span>Last 5 Conversions</span>
+        <button class="btn-clear-history" id="clearHistory">Clear All</button>
+      </div>
+      <ul class="history-list" id="historyList">
+        <!-- Injected by JS -->
+      </ul>
+      <div class="history-empty" id="historyEmpty">No conversions yet. Start converting!</div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-icon small">
+          <svg viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="18" fill="url(#flg)" />
+            <path d="M18 8v12M18 26a4 4 0 100-8 4 4 0 000 8z" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+            <path d="M22 12h3M22 15h2" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+            <defs>
+              <linearGradient id="flg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00E5FF" />
+                <stop offset="1" stop-color="#7B2FF7" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span>ThermoSync</span>
+      </div>
+      <p class="footer-tagline">Smart Temperature Converter Dashboard</p>
+      <!-- <p class="footer-credit">Built with ❤️ by <strong>Developer</strong></p> -->
+      <!-- <div class="social-icons"> 
+        <a href="#" aria-label="GitHub" class="social-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="#" aria-label="Twitter" class="social-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn" class="social-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div> -->
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
